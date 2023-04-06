@@ -1,0 +1,12 @@
+---
+title: "01-blast.Rmd"
+author: "Olivia Cattau"
+date: '2023-04-06'
+output: html_document
+---
+
+```{bash}
+cd /Applications/bioinfo/
+curl -O https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-macosx.tar.gz
+tar -xf ncbi-blast-2.13.0+-x64-macosx.tar.gz
+```
