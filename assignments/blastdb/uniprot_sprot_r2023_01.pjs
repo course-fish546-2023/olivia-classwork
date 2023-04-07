@@ -1,0 +1,22 @@
+{
+  "version": "1.2",
+  "dbname": "uniprot_sprot_r2023_01",
+  "dbtype": "Protein",
+  "db-version": 5,
+  "description": "../output/uniprot_sprot_r2023_01.fasta",
+  "number-of-letters": 205728242,
+  "number-of-sequences": 569213,
+  "last-updated": "2023-04-07T11:02:00",
+  "number-of-volumes": 1,
+  "bytes-total": 329505742,
+  "bytes-to-cache": 210851296,
+  "files": [
+    "uniprot_sprot_r2023_01.pdb",
+    "uniprot_sprot_r2023_01.phr",
+    "uniprot_sprot_r2023_01.pin",
+    "uniprot_sprot_r2023_01.pot",
+    "uniprot_sprot_r2023_01.psq",
+    "uniprot_sprot_r2023_01.ptf",
+    "uniprot_sprot_r2023_01.pto"
+  ]
+}
