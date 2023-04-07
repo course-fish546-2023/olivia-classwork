@@ -7,3 +7,4 @@ assignments/code/ncbi-blast-2.13.0+-x64-macosx.tar.gz
 assignments/blastdb/uniprot_sprot_r2023_01.psq
 *.fasta
 assignments/blastdb/uniprot_sprot_r2023_01.phr
+assignments/code/stream\?compressed=true&format=fasta&query=%28%2A%29%20AND%20%28reviewed%3Atrue%29

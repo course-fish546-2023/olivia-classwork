@@ -57,8 +57,9 @@ wc -l ../output/Ab_4-uniprot_blastx.tab
 curl -O "Accept: text/plain; format=tsv" "https://rest.uniprot.org/uniprotkb/search?query=reviewed:true+AND+organism_id:9606"
 ```
 
+#my link from swiss prot, old link doesn't work
 ```{bash}
-curl -O -H "Accept: text/plain; format=tsv" "https://rest.uniprot.org/uniprotkb/stream?compressed=true&fields=accession%2Creviewed%2Cid%2Cprotein_name%2Cgene_names%2Corganism_name%2Clength%2Cgo_f%2Cgo%2Cgo_p%2Cgo_c%2Cgo_id%2Ccc_interaction%2Cec%2Cxref_reactome%2Cxref_unipathway%2Cxref_interpro&format=tsv&query=%28%2A%29%20AND%20%28reviewed%3Atrue%29"
+curl -O -H "Accept: text/plain; format=tsv" "https://rest.uniprot.org/uniprotkb/stream?compressed=true&format=fasta&query=%28%2A%29%20AND%20%28reviewed%3Atrue%29"
 ```
 
 #Join Blast Table with Annotation Table
@@ -76,19 +77,25 @@ tr '|' '\t' < ../output/Ab_4-uniprot_blastx.tab \
 > ../output/Ab_4-uniprot_blastx_sep.tab
 ```
 
+
+#not found in directory 
 ```{bash}
-head -2 ../data/uniprot_table_r2023_01.tab
-wc -l ../data/uniprot_table_r2023_01.tab
+head -2 ../output/uniprot_table_r2023_01.tab
+wc -l ../output/uniprot_table_r2023_01.tab
 ```
 
 ```{r}
 library(tidyverse)
+library(dplyr)
+install.packages("hms")
+install.packages("kableExtra", dependencies = TRUE)
+
 library("kableExtra")
 ```
 
 ```{r}
 bltabl <- read.csv("../output/Ab_4-uniprot_blastx_sep.tab", sep = '\t', header = FALSE)
-spgo <- read.csv("../data/uniprot_table_r2023_01.tab", sep = '\t', header = TRUE)
+spgo <- read.csv("../output/uniprot_table_r2023_01.tab", sep = '\t', header = TRUE)
 str(spgo)
 ```
 
