@@ -82,6 +82,8 @@ tr '|' '\t' < ../output/Ab_4-uniprot_blastx.tab \
 ```{bash}
 head -2 ../output/uniprot_table_r2023_01.tab
 wc -l ../output/uniprot_table_r2023_01.tab
+
+
 ```
 
 ```{r}
@@ -93,9 +95,10 @@ install.packages("kableExtra", dependencies = TRUE)
 library("kableExtra")
 ```
 
+#used gannet link for uniprot_table_r2023_01.tab
 ```{r}
 bltabl <- read.csv("../output/Ab_4-uniprot_blastx_sep.tab", sep = '\t', header = FALSE)
-spgo <- read.csv("../output/uniprot_table_r2023_01.tab", sep = '\t', header = TRUE)
+spgo <- read.csv("https://gannet.fish.washington.edu/seashell/snaps/uniprot_table_r2023_01.tab", sep = '\t', header = TRUE)
 str(spgo)
 ```
 
