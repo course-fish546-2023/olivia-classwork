@@ -1,0 +1,12 @@
+---
+title: "02-Differential Gene Expression"
+author: "Olivia"
+date: "2023-04-17"
+output: html_document
+---
+
+```{bash}
+olivia@raven:~/gitrepos/olivia-classwork$ pwd
+/home/olivia/gitrepos/olivia-classwork
+olivia@raven:~/gitrepos/olivia-classwork$ mkdir programs
+```
