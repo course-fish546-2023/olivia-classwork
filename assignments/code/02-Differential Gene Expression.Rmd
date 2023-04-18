@@ -46,3 +46,29 @@ Running kallisto <CMD> without arguments prints usage information for <CMD>
 cd data
 curl --insecure -O https://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/rna.fna
 ```
+
+```{bash}
+/home/shared/kallisto/kallisto \
+quant index -i \
+../data/cgigas_roslin_rna.index \
+~/gitrepos/olivia-classwork/data/rna.fna
+```
+
+```{bash}
+~/gitrepos/olivia-classwork/data
+wget --recursive --no-parent --no-directories \
+--no-check-certificate \
+--accept '*.fastq.gz' \
+https://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/nopp/
+```
+
+```{bash}
+mkdir ../output/kallisto_01
+
+find ../data/*fastq.gz \
+| xargs basename -s _L001_R1_001.fastq.gz | xargs -I{} /home/shared/kallisto/kallisto \
+quant -i ../data/cgigas_roslin_rna.index \
+-o ../output/kallisto_01/{} \
+-t 40 \
+--single -l 100 -s 10 ../data/{}_L001_R1_001.fastq.gz
+```
