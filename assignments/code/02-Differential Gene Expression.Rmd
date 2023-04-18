@@ -10,3 +10,39 @@ olivia@raven:~/gitrepos/olivia-classwork$ pwd
 /home/olivia/gitrepos/olivia-classwork
 olivia@raven:~/gitrepos/olivia-classwork$ mkdir programs
 ```
+
+```{bash}
+olivia@raven:~/gitrepos/olivia-classwork$ cd programs
+olivia@raven:~/gitrepos/olivia-classwork/programs$  wget https://github.com/pachterlab/kallisto/releases/download/v0.46.1/kallisto_linux-v0.46.1.tar.gz
+#kallisto_linux-v0.46.1.tar.gz’ saved [7274037/7274037]
+olivia@raven:~/gitrepos/olivia-classwork/programs$ tar -xvzf kallisto_linux-v0.46.1.tar.gz
+```
+
+```{bash}
+olivia@raven:~/gitrepos/olivia-classwork/programs$ cd kallisto
+olivia@raven:~/gitrepos/olivia-classwork/programs/kallisto$ ls
+kallisto  license.txt  README.md  test
+olivia@raven:~/gitrepos/olivia-classwork/programs/kallisto$ ./kallisto
+kallisto 0.46.1
+
+Usage: kallisto <CMD> [arguments] ..
+
+Where <CMD> can be one of:
+
+    index         Builds a kallisto index 
+    quant         Runs the quantification algorithm 
+    bus           Generate BUS files for single-cell data 
+    pseudo        Runs the pseudoalignment step 
+    merge         Merges several batch runs 
+    h5dump        Converts HDF5-formatted results to plaintext
+    inspect       Inspects and gives information about an index
+    version       Prints version information
+    cite          Prints citation information
+
+Running kallisto <CMD> without arguments prints usage information for <CMD>
+```
+
+```{bash}
+cd data
+curl --insecure -O https://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/rna.fna
+```
