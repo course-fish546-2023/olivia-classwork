@@ -14,8 +14,8 @@ format:
 a)  **An R Markdown file is plain text file that contains what 3 important types of content?**
 
 1. Text: for writing in plain english
-2. Code: for displaying code in any language
-3. Knit Output: for displayig graphs or images or code output 
+2. Code Chunks: for displaying code in any language and for knitting graphs and images directly 
+3. YAML header: for writing titles and dates and authorship
 
 
 b)  **What is a chunk and how do you add them? of the many chunk options which one do you think you will use the most and why? How is inline code different than code chunks?**
