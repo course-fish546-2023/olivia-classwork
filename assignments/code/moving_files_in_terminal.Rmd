@@ -1,0 +1,13 @@
+---
+title: "moving_files_terminal"
+author: "Olivia Cattau"
+date: '2023-04-25'
+output: html_document
+---
+
+#for moving files in terminal
+
+#from local computer to MOX (or hyak)
+rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/code/04-job-sh.sh ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/
+
+rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/code/04-hello.py ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/
