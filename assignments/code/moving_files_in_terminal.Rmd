@@ -11,3 +11,6 @@ output: html_document
 rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/code/04-job-sh.sh ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/
 
 rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/code/04-hello.py ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/
+
+#from MOX (or hyak) to Github repo (via local computer)
+rsync -avz ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/ /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/output
