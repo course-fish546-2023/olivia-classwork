@@ -2,18 +2,29 @@
 title: "05-Quarto_Presentation"
 author: "Olivia Cattau"
 date: '2023-04-25'
-output: ioslides_presentation
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
 ---
 
 ## Minimum Required components
-- [ ]Show core code
-- [x]Show parts of initial data (could be first few lines etc)
-- [ ]Include a table
-- [ ]Include image
-- [x]Include plot generated from code
-- [ ]Highlight specific lines of code in code block
+- [x] Show core code
+- [x] Show parts of initial data (could be first few lines etc)
+- [ ] Include a table
+- [ ] Include image
+- [x] Include plot generated from code
+- [ ] Highlight specific lines of code in code block
 
-```{r}
+## Project Goals
+- [ ] annotate geoduck transcriptome
+- [ ] annotate geoduck tissue transcriptome (gonad, ctenidia, heart, juvenile, larvae)
+- [ ] add comparative species analysis with Mercenaria and Manila transcriptomes against geoduck transcriptome
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+```{r echo=FALSE}
 library(tidyverse)
 library(stringr)
 library(UpSetR)
@@ -26,31 +37,34 @@ library(tidyverse)
 library(magrittr)
 library(dplyr)   
 library(scales)
+library(knitr)
 ```
 
-## load new genome linked transcriptome PGEN
-- load raw data
-```{r}
+## What is a Geoduck?
+![geoduck]("https://raw.githubusercontent.com/course-fish546-2023/olivia-geoduck/main/Holding-Geoduck-1-770x1024.jpeg")
+
+
+```{r echo=FALSE, results='asis'}
 salmonMatrix<-read.table(file="https://raw.githubusercontent.com/sr320/paper-geoduck-gene-exp/main/data/salmon.merged.gene_tpm.tsv", header=TRUE, sep = '\t')
 names(salmonMatrix)[1]<-"target_id"
 names(salmonMatrix)[2]<-"gene"
-head(salmonMatrix)
 #34,947
-head(salmonMatrix)
+kable(salmonMatrix[1:5,], caption = "Raw tpm data")
 ```
 
 
 
-## load goslim mapping from Swiss Prott
+- load goslim mapping from Swiss Prott
 [link here](https://github.com/RobertsLab/code/tree/master/r_projects/sam/20230328-pgen-gene_annotation-update) 
-```{r}
+```{r echo=FALSE}
 #double check to make sure this is reading the data correctly
 goslims<-read.csv(file="https://raw.githubusercontent.com/RobertsLab/code/master/r_projects/sam/20230328-pgen-gene_annotation-update/outputs/02-goslim-mapping/20230329-pgen-annotations-SwissProt-GO-BP_GOslim.tab", header=TRUE, sep = '\t')
 #14,672
 ```
 
 ## download other clam species
-```{r}
+```{r echo=FALSE, results='asis'}
+library(knitr)
 #from Mox blasting Manilla/Mercenaria on Pgen
 Manilla_Pgen<-read.table(file="https://gannet.fish.washington.edu/gigas/data/p.generosa/Manilla_Pgenenerosa_blastx.tab")
 Manila_Pgen_new <- separate(Manilla_Pgen, V2, into = c("gene", "Scaffold"), sep = "::")
@@ -102,10 +116,11 @@ Pgen_Mercenaria_goslims<- Pgen_Mercenaria_new %>%
 left_join(goslims, by=c("gene")) #5099
 
 head(Pgen_Manila_goslims)
+kable(Pgen_Manila_goslims[1:5,], caption= "Manila db blast result")
 ```
 
 ## turn SalmonMatrix into long format
-```{r}
+```{r echo=FALSE}
 tidy_data<-salmonMatrix
 head(tidy_data)
 tidy_data_long<-tidy_data %>%
@@ -118,7 +133,7 @@ tidy_data_long$binary=ifelse(tidy_data_long$tpm > 0, 1, 0)
 ```
 
 ## combine datasets into one gene annotation file
-```{r}
+```{r echo=FALSE}
 pgenerosa_simple_goslims<-salmonMatrix %>% #best pgenerosa data set
   left_join(goslims, by=c("gene"))
 pgenerosa_long<-tidy_data_long %>% #best long pgenerosa data set
@@ -130,7 +145,7 @@ head(pgenerosa_simple_goslims)
 ```
 
 ## Break cells by semi-colon and return only distinct values
-```{r}
+```{r echo=FALSE}
 #break cells and reform with unique values only
 distinct_goslims <- pgenerosa_simple_goslims %>%
   mutate(Term_unique = lapply(strsplit(as.character(Term), ";"), function(Term_unique) paste0(unique(Term_unique), collapse = ";"))) %>% 
@@ -143,7 +158,7 @@ head(distinct_goslims)
 
 ## SPECIES
 -  count occurrences for table
-```{r}
+```{r echo=FALSE}
 # For Pgenerosa alone (wide format) 
 # Separate the "Term" column by semi-colons and count the occurrences
 term_count_Pgen <- distinct_goslims %>% #make sure you have removed duplicate values beforehand
@@ -235,7 +250,7 @@ head(term_count_best)
 ```
 
 ##normalize
-```{r}
+```{r echo=FALSE}
 #normalize by Pgen transcriptome
 sum_terms<- term_count_Pgen %>% #count terms in n 
   summarise(total_n = sum(n)) #17,611
@@ -272,7 +287,7 @@ species_normal<-grouped_data1 %>%
 ```
 
 ##count GOterms unique to species
-```{r}
+```{r echo=FALSE}
 #####make new variables with binary data
 
 #wide format data
@@ -414,21 +429,75 @@ head(species_unique)
 ```
 - done with species data organization!
 
-## Tissue
+## Tissues
 - ctenidia
 - heart
 - gonad
 - juvenile
 - larvae
-```{r}
+```{r echo=FALSE, results='asis'}
+#count top GOterms
+tissue_goslims <- pgenerosa_long %>%
+    group_by(tissue) %>% 
+  filter(binary == 1) %>%
+  mutate(Term_unique = lapply(strsplit(as.character(Term), ";"), function(Term_unique) paste0(unique(Term_unique), collapse = ";"))) %>% 
+  distinct(Term_unique, .keep_all = TRUE) %>% 
+  filter(!is.na(Term_unique)) %>%
+  separate_rows(Term_unique, sep = ";") %>%
+  mutate(Term_unique = trimws(Term_unique)) %>%
+  count(Term_unique, tissue, sort = TRUE)
 
-
-
-
+kable(tissue_goslims[1:5,], caption="GOterms by tissue")
 ```
 
-## Best Tissue Heatmap where white =  0.9
-```{r}
+
+## Normalize 
+- normalize goterm count by % in geoduck transcriptome by % tissue goterm counts by tissue transcriptome and return another % which is the normalized goterm count
+```{r echo=TRUE}
+#add new column to variable term_count_Pgen
+
+#normalize data by % hit in Pgen transcriptome
+sum_terms<- term_count_Pgen %>% #count terms in n 
+  summarise(total_n = sum(n)) #17,611
+
+Pgen_normalized<- term_count_Pgen %>%
+  mutate(Pgen_normalized = n/17611) #<<
+
+#normalize tissue data
+normal_counts<- tissue_goslims %>%
+  group_by(tissue) %>%
+  summarise(total_n = sum(n))
+#heart = 16,021
+#ctenidia = 15,911
+#gonad = 14,715
+#juv = 17,277
+#larvae = 16,632
+
+filtered_data <- tissue_goslims %>%
+  filter(tissue %in% c("ctenidia", "heart", "gonad", "larvae", "juvenile")) %>%
+  mutate(n_divided = case_when(tissue == "ctenidia" ~ n/15911, #<<
+                               tissue == "heart" ~ n/16021, #<<
+                               tissue == "gonad" ~ n/14715, #<<
+                               tissue == "larvae" ~ n/16632, #<<
+                               tissue == "juvenile" ~ n/17277)) #<<
+
+#combine Pgen_normalized with filtered_data and add new column normalized where tissue_n/geoduck_n to produce new normalized value
+
+grouped_data<-left_join(filtered_data, Pgen_normalized, by="Term_unique")
+
+Tis_normal<-grouped_data %>%
+  mutate(normalized = n_divided/Pgen_normalized)%>%
+  rename(n_tissue = n.x) %>%
+  rename(n_Pgen = n.y) %>%
+  mutate(log_scale = log(normalized))
+#for heatmap
+
+kable(Tis_normal[1:5,], caption = "tissue data normalized for heatmap")
+```
+
+
+## Tissue Heatmap normalized by P. generosa transcriptome where white =  0.9
+```{r echo=FALSE}
 Tis_normal_2<-Tis_normal %>%
   filter(Term_unique != "NA")
 
@@ -437,8 +506,8 @@ heatmap8<-ggplot(Tis_normal_2, aes(tissue, y=Term_unique, fill=normalized))+geom
 heatmap8
 ```
 
-## Best Species Heatmap where white =  0.9
-```{r}
+## Species Heatmap normalized by P. generosa transcriptopme where white =  0.9
+```{r echo=FALSE}
 species_normal_2<-species_normal %>%
   filter(Term_unique != "NA")%>%
   filter(transcriptome == "Manila_r" | transcriptome == "Mercenaria_r")
@@ -447,22 +516,3 @@ heatmap10<-ggplot(species_normal_2, aes(transcriptome, y=Term_unique, fill=norma
 
 heatmap10
 ```
-
-## Slide with Bullets
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-```{r cars, echo = TRUE}
-summary(cars)
-```
-
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
-```
-
