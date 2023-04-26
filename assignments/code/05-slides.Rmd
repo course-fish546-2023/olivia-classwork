@@ -41,8 +41,7 @@ library(knitr)
 ```
 
 ## What is a Geoduck?
-![geoduck]("https://raw.githubusercontent.com/course-fish546-2023/olivia-geoduck/main/Holding-Geoduck-1-770x1024.jpeg")
-
+<img src="https://raw.githubusercontent.com/course-fish546-2023/olivia-classwork/main/Holding-Geoduck-1-770x1024.jpeg">
 
 ```{r echo=FALSE, results='asis'}
 salmonMatrix<-read.table(file="https://raw.githubusercontent.com/sr320/paper-geoduck-gene-exp/main/data/salmon.merged.gene_tpm.tsv", header=TRUE, sep = '\t')
@@ -52,11 +51,9 @@ names(salmonMatrix)[2]<-"gene"
 kable(salmonMatrix[1:5,], caption = "Raw tpm data")
 ```
 
-
-
-- load goslim mapping from Swiss Prott
-[link here](https://github.com/RobertsLab/code/tree/master/r_projects/sam/20230328-pgen-gene_annotation-update) 
 ```{r echo=FALSE}
+#load goslim mapping from Swiss Prott
+#[link here](https://github.com/RobertsLab/code/tree/master/r_projects/sam/20230328-pgen-gene_annotation-update) 
 #double check to make sure this is reading the data correctly
 goslims<-read.csv(file="https://raw.githubusercontent.com/RobertsLab/code/master/r_projects/sam/20230328-pgen-gene_annotation-update/outputs/02-goslim-mapping/20230329-pgen-annotations-SwissProt-GO-BP_GOslim.tab", header=TRUE, sep = '\t')
 #14,672
@@ -115,12 +112,11 @@ left_join(goslims, by=c("gene")) #6521
 Pgen_Mercenaria_goslims<- Pgen_Mercenaria_new %>%
 left_join(goslims, by=c("gene")) #5099
 
-head(Pgen_Manila_goslims)
-kable(Pgen_Manila_goslims[1:5,], caption= "Manila db blast result")
+kable(Pgen_Manila_goslims[1:6,], caption= "Manila db blast result")
 ```
 
-## turn SalmonMatrix into long format
 ```{r echo=FALSE}
+## turn SalmonMatrix into long format
 tidy_data<-salmonMatrix
 head(tidy_data)
 tidy_data_long<-tidy_data %>%
@@ -133,7 +129,7 @@ tidy_data_long$binary=ifelse(tidy_data_long$tpm > 0, 1, 0)
 ```
 
 ## combine datasets into one gene annotation file
-```{r echo=FALSE}
+```{r echo=TRUE}
 pgenerosa_simple_goslims<-salmonMatrix %>% #best pgenerosa data set
   left_join(goslims, by=c("gene"))
 pgenerosa_long<-tidy_data_long %>% #best long pgenerosa data set
@@ -145,20 +141,22 @@ head(pgenerosa_simple_goslims)
 ```
 
 ## Break cells by semi-colon and return only distinct values
-```{r echo=FALSE}
+```{r echo=TRUE}
 #break cells and reform with unique values only
 distinct_goslims <- pgenerosa_simple_goslims %>%
-  mutate(Term_unique = lapply(strsplit(as.character(Term), ";"), function(Term_unique) paste0(unique(Term_unique), collapse = ";"))) %>% 
-  distinct(Term_unique, .keep_all = TRUE) %>%
-  mutate(GOslim_unique = lapply(strsplit(as.character(GOslim), ";"),function(GOslim_unique) paste0(unique(GOslim_unique), collapse = ";"))) %>% 
+  ### <b>
+  mutate(Term_unique = lapply(strsplit(as.character(Term), ";"), function(Term_unique) paste0(unique(Term_unique), collapse = ";")))  %>% distinct(Term_unique, .keep_all = TRUE) %>%
+  mutate(GOslim_unique = lapply(strsplit(as.character(GOslim),";"),function(GOslim_unique) paste0(unique(GOslim_unique), collapse = ";"))) %>% 
   distinct(GOslim_unique, .keep_all = TRUE)
+### </b>
+
 
 head(distinct_goslims)
 ```
 
 ## SPECIES
--  count occurrences for table
-```{r echo=FALSE}
+- Mercenaria and Manila Clams
+```{r echo=FALSE, results='asis'}
 # For Pgenerosa alone (wide format) 
 # Separate the "Term" column by semi-colons and count the occurrences
 term_count_Pgen <- distinct_goslims %>% #make sure you have removed duplicate values beforehand
@@ -168,7 +166,7 @@ term_count_Pgen <- distinct_goslims %>% #make sure you have removed duplicate va
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_Pgen)
+#print(term_count_Pgen)
 
 # For Pgenerosa using pgenerosa_long (versus wide)
 # Separate the "Term" column by semi-colons and count the occurrences
@@ -181,7 +179,7 @@ term_count_Pgen_long <- pgenerosa_long %>%  # remove duplicates from Term column
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_Pgen_long)
+#print(term_count_Pgen_long)
 #exactly the same as Pgen_wide
 
 
@@ -196,7 +194,7 @@ term_count_manila <- Manila_Pgen_goslims %>% # remove duplicates from Term colum
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_manila)
+#print(term_count_manila)
 
 # Manila Reverse
 term_count_manila_r <- Pgen_Manila_goslims %>% # remove duplicates from Term column and create Term_unique column
@@ -208,7 +206,7 @@ term_count_manila_r <- Pgen_Manila_goslims %>% # remove duplicates from Term col
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_manila_r)
+#print(term_count_manila_r)
 
 #for Mercenaria Clam
 # Separate the "Term" column by semi-colons and count the occurrences
@@ -221,7 +219,7 @@ term_count_Mercenaria <- Mercenaria_Pgen_goslims %>% # remove duplicates from Te
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_Mercenaria)
+#print(term_count_Mercenaria)
 
 #for Mercenaria Clam reverse
 # Separate the "Term" column by semi-colons and count the occurrences
@@ -234,7 +232,7 @@ term_count_Mercenaria_r <- Pgen_Mercenaria_goslims %>% # remove duplicates from 
   count(Term_unique, sort = TRUE) # Count the occurrences and sort by descending count
 
 # Print the count of each term
-print(term_count_Mercenaria_r) #over 3x more terms than Mercenaria not reversed...wonder why that is....
+#print(term_count_Mercenaria_r) #over 3x more terms than Mercenaria not reversed...wonder why that is....
 
 #combine all 5 datasets
 term_count_all <- bind_rows(term_count_Pgen, term_count_manila, term_count_manila_r, term_count_Mercenaria, term_count_Mercenaria_r, .id = "transcriptome") 
@@ -246,11 +244,11 @@ term_count_best <- term_count_all %>%
                                   ifelse(transcriptome == 4, "Mercenaria", 
                                          ifelse(transcriptome == 5, "Mercenaria_r", NA))))))
 
-head(term_count_best)
+kable(term_count_best[1:7,], caption="GOterms count, removing duplicates")
 ```
 
-##normalize
-```{r echo=FALSE}
+## normalize species by Pgenerosa transcriptome 
+```{r echo=TRUE, results='asis'}
 #normalize by Pgen transcriptome
 sum_terms<- term_count_Pgen %>% #count terms in n 
   summarise(total_n = sum(n)) #17,611
@@ -267,7 +265,9 @@ normal_counts<- term_count_best %>%
 #Mercenaria = 2198
 #Mercenaria_r = 7027
 
+kable(normal_counts[1:7,], caption="Total Terms per Species")
 
+### <b>
 filtered_data1 <- term_count_best %>%
   filter(transcriptome %in% c("Mercenaria_r", "Manila", "Mercenaria", "Manila_r")) %>%
   mutate(n_divided = case_when(
@@ -275,6 +275,8 @@ filtered_data1 <- term_count_best %>%
                                transcriptome == "Manila_r" ~ n/1390,
                                transcriptome == "Mercenaria" ~ n/2198,
                                transcriptome == "Mercenaria_r" ~ n/7027))
+### <b>
+
 
 grouped_data1<-left_join(filtered_data1, Pgen_normalized, by="Term_unique")
 
@@ -286,8 +288,9 @@ species_normal<-grouped_data1 %>%
 #for heatmap
 ```
 
-##count GOterms unique to species
+
 ```{r echo=FALSE}
+##count GOterms unique to species
 #####make new variables with binary data
 
 #wide format data
@@ -424,17 +427,11 @@ Pgen_count_unique <- goslims_genes_Pgen %>% # remove duplicates from Term column
   mutate(count_unique = n()-1, species= "Pgen_alone")
 
 species_unique<-bind_rows(Mer_Pgen_count_unique, Man_Pgen_count_unique, MM_count_unique, Pgen_count_unique, all_count_unique)
-
-head(species_unique)
 ```
-- done with species data organization!
+
 
 ## Tissues
-- ctenidia
-- heart
-- gonad
-- juvenile
-- larvae
+
 ```{r echo=FALSE, results='asis'}
 #count top GOterms
 tissue_goslims <- pgenerosa_long %>%
@@ -451,17 +448,18 @@ kable(tissue_goslims[1:5,], caption="GOterms by tissue")
 ```
 
 
-## Normalize 
-- normalize goterm count by % in geoduck transcriptome by % tissue goterm counts by tissue transcriptome and return another % which is the normalized goterm count
-```{r echo=TRUE}
+## Normalize Tissues by Pgenerosa Transcriptome 
+```{r echo=FALSE, results='asis'}
 #add new column to variable term_count_Pgen
+#- normalize goterm count by % in geoduck transcriptome by % tissue goterm counts by tissue transcriptome and return another % which is the normalized goterm count
+
 
 #normalize data by % hit in Pgen transcriptome
 sum_terms<- term_count_Pgen %>% #count terms in n 
   summarise(total_n = sum(n)) #17,611
 
 Pgen_normalized<- term_count_Pgen %>%
-  mutate(Pgen_normalized = n/17611) #<<
+  mutate(Pgen_normalized = n/17611) 
 
 #normalize tissue data
 normal_counts<- tissue_goslims %>%
@@ -472,6 +470,8 @@ normal_counts<- tissue_goslims %>%
 #gonad = 14,715
 #juv = 17,277
 #larvae = 16,632
+
+kable(normal_counts[1:6,], caption="Total Terms per Tissue(s)")
 
 filtered_data <- tissue_goslims %>%
   filter(tissue %in% c("ctenidia", "heart", "gonad", "larvae", "juvenile")) %>%
@@ -492,7 +492,7 @@ Tis_normal<-grouped_data %>%
   mutate(log_scale = log(normalized))
 #for heatmap
 
-kable(Tis_normal[1:5,], caption = "tissue data normalized for heatmap")
+#kable(Tis_normal[1:7,], caption = "tissue data normalized for heatmap")
 ```
 
 
