@@ -7,18 +7,10 @@ output:
   slidy_presentation: default
 ---
 
-## Minimum Required components
-- [x] Show core code
-- [x] Show parts of initial data (could be first few lines etc)
-- [ ] Include a table
-- [ ] Include image
-- [x] Include plot generated from code
-- [ ] Highlight specific lines of code in code block
-
 ## Project Goals
-- [ ] annotate geoduck transcriptome
-- [ ] annotate geoduck tissue transcriptome (gonad, ctenidia, heart, juvenile, larvae)
-- [ ] add comparative species analysis with Mercenaria and Manila transcriptomes against geoduck transcriptome
+- [x] annotate geoduck transcriptome
+- [x] annotate geoduck tissue transcriptome (gonad, ctenidia, heart, juvenile, larvae)
+- [x] add comparative species analysis with Mercenaria and Manila transcriptomes against geoduck transcriptome
 
 ```{r setup, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 

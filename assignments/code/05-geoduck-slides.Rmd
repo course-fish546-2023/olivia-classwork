@@ -399,3 +399,17 @@ heatmap8<-ggplot(Tis_normal_2, aes(tissue, y=Term_unique, fill=normalized))+geom
 
 heatmap8
 ```
+
+
+## Plan for the next 4 weeks: 
+- Week 5 -  added new normalizing gene count column for heatmapping, finished writing draft 1 of results, working on methods, finish introduction
+
+- Week 6 - finish writing introduction/discussion for geoduck paper
+
+- Week 7 - address edits from committee 
+
+- Week 8 - 
+
+- Week 9 - 
+
+- Week 10 - hopefully nothing, prepare for graduation!
