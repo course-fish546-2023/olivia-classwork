@@ -1,0 +1,15 @@
+---
+title: "06-alignments"
+author: "Olivia Cattau"
+date: '2023-05-02'
+output: html_document
+---
+#Introduction
+This week, we will consider a different way of looking at the relatedness of genetic information: single nucleotide polymorphisms (SNPs). SNPs are used to describe population variation or phylogenetic relationships. A first step in this is aligning sequence reads to look for variation.
+
+
+## SAM and BAM files
+SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) are two file formats used to store aligned sequencing data. Both formats are designed to store read alignments from high-throughput sequencing experiments to a reference genome. 
+
+## SAMtools
+Samtools is a software package designed for manipulating and analyzing high-throughput sequencing data, specifically SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) files. 
