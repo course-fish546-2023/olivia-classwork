@@ -33,13 +33,13 @@ knitr::opts_chunk$set(
 
 
 # Database Creation
-```{r download-data, engine='bash'}
+```{bash}
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/blastx -h
 ```
 
 
 ## obtain Fasta(s)
-```{r download-data, engine='bash'}
+```{bash}
 cd ../output
 curl -O https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
 mv uniprot_sprot.fasta.gz uniprot_sprot_r2023_01.fasta.gz
@@ -48,7 +48,7 @@ ls ../output
 ```
 
 ## make database
-```{r make-db, engine='bash'}
+```{bash}
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/makeblastdb \
 -in ../output/uniprot_sprot_r2023_01.fasta \
 -dbtype prot \
@@ -56,13 +56,13 @@ ls ../output
 ```
 
 # Get Query Sequence
-```{r get-query, engine='bash'}
+```{bash}
 curl https://eagle.fish.washington.edu/cnidarian/Ab_4denovo_CLC6_a.fa \
 -k \
 > ../output/Ab_4denovo_CLC6_a.fa
 ```
 
-```{r , engine='bash'}
+```{bash}
 head ../output/Ab_4denovo_CLC6_a.fa
 echo "How many sequences are there?"
 grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
@@ -70,7 +70,7 @@ grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
 
 
 # Run Blast 
-```{r run-blast, engine='bash'}
+```{bash}
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/blastx \
 -query ../output/Ab_4denovo_CLC6_a.fa \
 -db ../blastdb/uniprot_sprot_r2023_01 \
@@ -82,40 +82,40 @@ grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
 ```
 
 ## output files
-```{r look-at-output, engine='bash'}
+```{bash}
 head -2 ../output/Ab_4-uniprot_blastx.tab
 wc -l ../output/Ab_4-uniprot_blastx.tab
 ```
 
 
 ## open link from swiss prot
-```{r download-data, engine='bash'}
+```{bash}
 curl -O "Accept: text/plain; format=tsv" "https://rest.uniprot.org/uniprotkb/search?query=reviewed:true+AND+organism_id:9606"
 ```
 
 ## my link from swiss prot, old link doesn't work
-```{r download-data, engine='bash'}
+```{bash}
 curl -O -H "Accept: text/plain; format=tsv" "https://rest.uniprot.org/uniprotkb/stream?compressed=true&format=fasta&query=%28%2A%29%20AND%20%28reviewed%3Atrue%29"
 ```
 
 # Join Blast Table with Annotation Table
-```{r join-blast-table, engine='bash'}
+```{bash}
 head -2 ../output/Ab_4-uniprot_blastx.tab
 wc -l ../output/Ab_4-uniprot_blastx.tab
 ```
 
-```{r , engine='bash'}
+```{bash}
 tr '|' '\t' < ../output/Ab_4-uniprot_blastx.tab | head -2
 ```
 
-```{r , engine='bash'}
+```{bash}
 tr '|' '\t' < ../output/Ab_4-uniprot_blastx.tab \
 > ../output/Ab_4-uniprot_blastx_sep.tab
 ```
 
 
 ### not found in directory, find in gannet instead
-```{r download-data, engine='bash'}
+```{bash}
 head -2 ../output/uniprot_table_r2023_01.tab
 wc -l ../output/uniprot_table_r2023_01.tab
 ```
