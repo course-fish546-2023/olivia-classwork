@@ -39,6 +39,8 @@ grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
 
 
 #Run Blast 
+=======
+
 ```{bash}
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/blastx \
 -query ../output/Ab_4denovo_CLC6_a.fa \
@@ -50,7 +52,9 @@ grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
 -outfmt 6
 ```
 
+
 #output
+
 ```{bash}
 head -2 ../output/Ab_4-uniprot_blastx.tab
 wc -l ../output/Ab_4-uniprot_blastx.tab
@@ -109,7 +113,6 @@ left_join(bltabl, spgo, by = c("V3" = "Entry")) %>%
   select(V1, V3, V13, Protein.names, Organism, Gene.Ontology..biological.process., Gene.Ontology.IDs) %>%
   mutate(V1 = str_replace_all(V1, pattern = "solid0078_20110412_FRAG_BC_WHITE_WHITE_F3_QV_SE_trimmed", replacement = "Ab")) %>%
   kbl() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
 
