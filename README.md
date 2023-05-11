@@ -1,5 +1,6 @@
 # olivia-geoduck
-repository for my geoduck transcriptome project 
+repository for FISH 546 homeowork and assignments 
+see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress
 
 ## Plan for the next 4 weeks: 
 Week 5 -  added new normalizing gene count column for heatmapping, finished writing draft 1 of results, working on methods, finish introduction
