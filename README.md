@@ -2,7 +2,15 @@
 repository for FISH 546 homeowork and assignments 
 see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress
 
-## Plan for the next 4 weeks: 
+## Research Progress Summarized: 
+Week 1 - presented research at National Shellfish Association Meeting
+
+Week 2 - Got COVID, started downloading clam transcriptomes
+
+Week 3 -
+
+Week 4 -
+
 Week 5 -  added new normalizing gene count column for heatmapping, finished writing draft 1 of results, working on methods, finish introduction
 
 Week 6 - finish writing introduction/discussion for geoduck paper
