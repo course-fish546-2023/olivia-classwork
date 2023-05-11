@@ -5,6 +5,8 @@ date: "2023-04-26"
 output:
   beamer_presentation: default
   ioslides_presentation: default
+date: '2023-04-26'
+output: ioslides_presentation
 ---
 
 ## Project Goals

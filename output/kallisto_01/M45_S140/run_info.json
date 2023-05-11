@@ -1,0 +1,13 @@
+{
+	"n_targets": 73307,
+	"n_bootstraps": 0,
+	"n_processed": 2858599,
+	"n_pseudoaligned": 1532125,
+	"n_unique": 880466,
+	"p_pseudoaligned": 53.6,
+	"p_unique": 30.8,
+	"kallisto_version": "0.46.1",
+	"index_version": 10,
+	"start_time": "Thu May 11 12:49:36 2023",
+	"call": "/home/shared/kallisto/kallisto quant -i /home/olivia/gitrepos/olivia-classwork/data/cgigas_roslin_rna.index -o /home/olivia/gitrepos/olivia-classwork/output/kallisto_01/M45_S140 -t 40 --single -l 100 -s 10 /home/olivia/gitrepos/olivia-classwork/assignments/code/M45_S140_L001_R1_001.fastq.gz"
+}

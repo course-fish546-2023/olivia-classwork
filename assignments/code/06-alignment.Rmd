@@ -4,7 +4,7 @@ author: "Olivia Cattau"
 date: '2023-05-02'
 output: html_document
 ---
-#Introduction/Task 1
+#Introduction
 This week, we will consider a different way of looking at the relatedness of genetic information: single nucleotide polymorphisms (SNPs). SNPs are used to describe population variation or phylogenetic relationships. A first step in this is aligning sequence reads to look for variation.
 
 
@@ -71,4 +71,7 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 ```{r, engine='bash'}
 tail -1 ../output/F143_cgigas.sam
 ```
+
+
+Samtools is a software package designed for manipulating and analyzing high-throughput sequencing data, specifically SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) files. 
 
