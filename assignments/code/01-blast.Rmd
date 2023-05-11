@@ -78,12 +78,10 @@ tr '|' '\t' < ../output/Ab_4-uniprot_blastx.tab \
 ```
 
 
-#not found in directory 
+#not found in directory, find in gannet instead
 ```{bash}
 head -2 ../output/uniprot_table_r2023_01.tab
 wc -l ../output/uniprot_table_r2023_01.tab
-
-
 ```
 
 ```{r}
@@ -91,7 +89,6 @@ library(tidyverse)
 library(dplyr)
 install.packages("hms")
 install.packages("kableExtra", dependencies = TRUE)
-
 library("kableExtra")
 ```
 
