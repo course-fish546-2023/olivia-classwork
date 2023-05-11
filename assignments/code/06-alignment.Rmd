@@ -1,0 +1,74 @@
+---
+title: "06-alignments"
+author: "Olivia Cattau"
+date: '2023-05-02'
+output: html_document
+---
+#Introduction/Task 1
+This week, we will consider a different way of looking at the relatedness of genetic information: single nucleotide polymorphisms (SNPs). SNPs are used to describe population variation or phylogenetic relationships. A first step in this is aligning sequence reads to look for variation.
+
+
+## SAM and BAM files
+SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) are two file formats used to store aligned sequencing data. Both formats are designed to store read alignments from high-throughput sequencing experiments to a reference genome. 
+
+## SAMtools
+Samtools is a software package designed for manipulating and analyzing high-throughput sequencing data, specifically SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) files. 
+
+
+#Download alignmnet data
+```{r, engine='bash'}         
+cd ../data
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai
+```
+
+```{r, engine='bash'}         
+cd ../data
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa.fai
+```
+
+##View TVIEW
+### Run in command line
+/home/shared/samtools-1.12/samtools tview \
+/home/olivia/gitrepos/olivia-classwork/assignments/code/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam \
+/home/olivia/gitrepos/olivia-classwork/assignments/code/GCF_002022765.2_C_virginica-3.0_genomic.fa
+
+#Task 2
+##Aligning WGS data and visualizing in IGV
+
+```{r, engine='bash'}
+cd ../data
+curl -O https://owl.fish.washington.edu/nightingales/C_gigas/F143n08_R2_001.fastq.gz
+curl -O https://owl.fish.washington.edu/nightingales/C_gigas/F143n08_R1_001.fastq.gz
+```
+
+```{r, engine='bash'}
+cd ../data
+curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/cgigas_uk_roslin_v1_genomic-mito.fa
+curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/cgigas_uk_roslin_v1_genomic-mito.fa.fai
+curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgigas_uk_roslin_v1_genomic-mito.gtf
+```
+
+
+## Alignment
+```{r, engine='bash'}
+/home/shared/hisat2-2.2.1/hisat2-build \
+-f /home/olivia/gitrepos/olivia-classwork/assignments/code/cgigas_uk_roslin_v1_genomic-mito.fa \
+/home/olivia/gitrepos/olivia-classwork/assignments/output/cgigas_uk_roslin_v1_genomic-mito.index
+```
+
+```{r, engine='bash'}
+/home/shared/hisat2-2.2.1/hisat2 \
+-x /home/olivia/gitrepos/olivia-classwork/assignments/output/cgigas_uk_roslin_v1_genomic-mito.index \
+-p 4 \
+-1 /home/olivia/gitrepos/olivia-classwork/assignments/code/F143n08_R1_001.fastq.gz \
+-2 /home/olivia/gitrepos/olivia-classwork/assignments/code/F143n08_R2_001.fastq.gz \
+-S /home/olivia/gitrepos/olivia-classwork/assignments/output/F143_cgigas.sam
+```
+
+##take a look
+```{r, engine='bash'}
+tail -1 ../output/F143_cgigas.sam
+```
+
