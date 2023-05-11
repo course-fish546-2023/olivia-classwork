@@ -7,9 +7,10 @@ Week 1 - presented research at National Shellfish Association Meeting
 
 Week 2 - Got COVID, started downloading clam transcriptomes
 
-Week 3 -
+Week 3 - gather genes from each tissue type, build sh files for blasting manilla clam and mercenaria against pgen in Mox, Run stand blasts with Manilla, Pgen and Mercenaria
+build database for Manilla, Pgen and Mercenaria, start writing methods
 
-Week 4 -
+Week 4 - dowload to raven the genomic and transctiptomic information for 6 clam species, find transcriptomes for introduction, break goslims into seperate columns, join blast tables with annotation tables
 
 Week 5 -  added new normalizing gene count column for heatmapping, finished writing draft 1 of results, working on methods, finish introduction
 
