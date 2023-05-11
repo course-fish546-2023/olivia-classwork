@@ -6,6 +6,10 @@ output: html_document
 ---
 
 ```{bash}
+cd /Applications/bioinfo/
+curl -O https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-macosx.tar.gz
+tar -xf ncbi-blast-2.13.0+-x64-macosx.tar.gz
+ls /Applications/bioinfo/
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/blastx -h
 ```
 
@@ -39,7 +43,6 @@ grep -c ">" ../output/Ab_4denovo_CLC6_a.fa
 
 
 #Run Blast 
-=======
 
 ```{bash}
 /Applications/bioinfo/ncbi-blast-2.13.0+/bin/blastx \
