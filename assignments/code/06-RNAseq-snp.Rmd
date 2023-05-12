@@ -135,7 +135,14 @@ The code below might not work. That is fine. The VCF in the above chunk can be u
 ```
 
 # Visualize
-- show bam file
+- show bam file (see above)
 - show (2) genome feature files
+
+1. ![mRNA](https://raw.githubusercontent.com/course-fish546-2023/olivia-classwork/main/output/IGV%20screenshot.png) 
+
+2. ![]()
+
 - bonus for annotating screenshots
+
+
 
