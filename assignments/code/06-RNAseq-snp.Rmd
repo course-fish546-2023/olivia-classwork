@@ -71,7 +71,7 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 -S /home/olivia/gitrepos/olivia-classwork/assignments/output/F143_cgigas.sam
 ```
 
-### start here, push now
+### start here, Raven crashed
 
 ## take a look
 ```{r, engine='bash'}
@@ -87,7 +87,7 @@ tail -1 ../output/F143_cgigas.sam
 ## Sort the BAM file, using 4 additional thread
 ```{r, engine='bash'}
 /home/shared/samtools-1.12/samtools sort -@ 4 \
-../output/F143_cgigas.bam -o ../output/F143_cgigas_sorted.bam
+~/gitrepos/olivia-classwork/output/F143_cgigas.bam -o ~/gitrepos/olivia-classwork/output/F143_cgigas_sorted.bam
 ```
 
 ## Index the sorted BAM file (multi-threading is not applicable to this operation)
