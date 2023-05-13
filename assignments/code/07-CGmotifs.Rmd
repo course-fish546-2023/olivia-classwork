@@ -14,6 +14,7 @@ library(seqinr)
 
 # Replace 'input.fasta' with the name of your multi-sequence fasta file
 pgen_genome<-read.fasta(file="https://gannet.fish.washington.edu/Atumefaciens/20191105_swoose_pgen_v074_renaming/Panopea-generosa-v1.0.fa")
+sequences<-pgen_genome
 ```
 
 
@@ -34,9 +35,9 @@ selected_sequences <- sequences[selected_indices]
 ```
 
 
-```{r}
+```{r cache=TRUE, eval=TRUE}
 # Replace 'output.fasta' with your desired output file name
-output_file <- "../output/output.fasta"
+output_file <- "~/gitrepos/olivia-coursework/output/pgen_output.fasta"
 write.fasta(selected_sequences, names(selected_sequences), output_file, open = "w")
 ```
 
@@ -58,4 +59,4 @@ write.fasta(selected_sequences, names(selected_sequences), output_file, open = "
 fuzznuc -sequence ../output/10_seqs.fa -pattern CG -rformat gff -outfile ../output/CGoutput.gff
 ```
 
-Push these files to GitHub. Grab raw urls to visualize in IGV. Fasta file is the “genome”. Take 2 screenshots and place in code file. At the top of your code page be sure to provide link to visual report (rpubs). Alternatively you can also output to markdown.
+Push these files into GitHub. Grab raw urls to visualize in IGV. Fasta file is the “genome”. Take 2 screenshots and place in code file. At the top of your code page be sure to provide link to visual report (rpubs). Alternatively you can also output to markdown.
