@@ -13,9 +13,7 @@ For this you will take 10 sequences related to your project, ID CG motifs using 
 library(seqinr)
 
 # Replace 'input.fasta' with the name of your multi-sequence fasta file
-input_file <- "input.fasta"
-sequences <- read.fasta(input_file)
-
+pgen_genome<-read.fasta(file="https://gannet.fish.washington.edu/Atumefaciens/20191105_swoose_pgen_v074_renaming/Panopea-generosa-v1.0.fa")
 ```
 
 
