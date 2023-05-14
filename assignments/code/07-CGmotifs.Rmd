@@ -51,12 +51,23 @@ write.fasta(selected_sequences, names(selected_sequences), output_file, open = "
 ```{bash}
 #needed downstream for IGV
 /home/shared/samtools-1.12/samtools faidx \
-../output/10_seqs.fa
+~/gitrepos/olivia-coursework/output/pgen_output.fasta
 ```
 
 
 ```{bash}
-fuzznuc -sequence ../output/10_seqs.fa -pattern CG -rformat gff -outfile ../output/CGoutput.gff
+fuzznuc -sequence ~/gitrepos/olivia-coursework/output/pgen_output.fasta -pattern CG -rformat gff -outfile  ~/gitrepos/olivia-coursework/output/Pgen_CGoutput.gff
 ```
 
 Push these files into GitHub. Grab raw urls to visualize in IGV. Fasta file is the “genome”. Take 2 screenshots and place in code file. At the top of your code page be sure to provide link to visual report (rpubs). Alternatively you can also output to markdown.
+
+genome<-https://gannet.fish.washington.edu/gigas/data/p.generosa/pgen_output.fasta
+
+gff<-https://gannet.fish.washington.edu/gigas/data/p.generosa/Pgen_CGoutput.gff
+
+
+rsync -avz Pgen_CGoutput.gff ocattau@gannet.fish.washington.edu:/volume2/web/gigas/data/p.generosa/Pgen_CGoutput.gff
+
+rsync -avz pgen_output.fasta.fai ocattau@gannet.fish.washington.edu:/volume2/web/gigas/data/p.generosa/pgen_output.fasta.fai
+
+rsync -avz pgen_output.fasta ocattau@gannet.fish.washington.edu:/volume2/web/gigas/data/p.generosa/pgen_output.fasta
