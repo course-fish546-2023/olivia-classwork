@@ -8,6 +8,6 @@
 	"p_unique": 21.9,
 	"kallisto_version": "0.46.1",
 	"index_version": 10,
-	"start_time": "Thu May 11 12:49:04 2023",
+	"start_time": "Thu May 11 16:34:14 2023",
 	"call": "/home/shared/kallisto/kallisto quant -i /home/olivia/gitrepos/olivia-classwork/data/cgigas_roslin_rna.index -o /home/olivia/gitrepos/olivia-classwork/output/kallisto_01/D58_S144 -t 40 --single -l 100 -s 10 /home/olivia/gitrepos/olivia-classwork/assignments/code/D58_S144_L001_R1_001.fastq.gz"
 }
