@@ -5,7 +5,11 @@ date: '2023-04-25'
 output: html_document
 ---
 
-#for moving files in terminal
+#for moving files ito Gannet
+rsync -avz Pgen_CGoutput.gff ocattau@gannet.fish.washington.edu:/volume2/web/gigas/data/p.generosa/Pgen_CGoutput.gff
+
+tN.2xo~yOD
+
 
 #from local computer to MOX (or hyak)
 rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/code/04-job-sh.sh ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/
@@ -14,3 +18,6 @@ rsync -avz /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/cod
 
 #from MOX (or hyak) to Github repo (via local computer)
 rsync -avz ocattau@mox.hyak.uw.edu:/gscratch/scrubbed/olivia/assign_04/ /Users/oliviacattau/Documents/GitHub/olivia-classwork/assignments/output
+
+#reset one commit
+git reset --mixed HEAD~1
