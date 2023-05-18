@@ -1,0 +1,83 @@
+---
+title: "08-BEDtools"
+author: "Olivia Cattau"
+date: "2023-05-18"
+output: html_document
+---
+
+# BEDtools
+doing arithmetic with sequences
+![snapshot](https://gannet.fish.washington.edu/seashell/snaps/Monosnap_coverage__bedtools_2.31.0_documentation_2023-05-14_07-59-15.png)
+
+### load bam and bai data
+```{r, engine='bash', eval=FALSE}
+cd data 
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam #large file, do not push....failed at 12.9GB
+curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai #did not work.....
+```
+
+### load bed file with gene information.
+```{r, engine='bash', eval=FALSE}
+cd data 
+curl -O https://eagle.fish.washington.edu/Cvirg_tracks/C_virginica-3.0_Gnomon_genes.bed
+```
+
+## Convert BAM to BAI
+```{r, engine='bash', eval=FALSE}
+/home/shared/bedtools2/bin/bedtools bamtobed \
+-i /home/olivia/gitrepos/olivia-classwork/data/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam \
+> /home/olivia/gitrepos/olivia-classwork/assignments/output/08-19F.bed
+```
+
+
+# Get coverage of sequence reads on gene regions
+## Default behavior
+After each interval in A, bedtools coverage will report:
+
+1. The number of features in B that overlapped (by at least one base pair) the A interval.
+
+2. The number of bases in A that had non-zero coverage from features in B.
+
+3. The length of the entry in A.
+
+4. The fraction of bases in A that had non-zero coverage from features in B.
+
+```{r, engine='bash', eval=FALSE}
+/home/shared/bedtools2/bin/bedtools coverage \
+-a ~/gitrepos/olivia-classwork/data/C_virginica-3.0_Gnomon_genes.bed \
+-b ~/gitrepos/olivia-classwork/assignments/output/08-19F.bed \
+> ~/gitrepos/olivia-classwork/assignments/output/08-gene-19F-coverage.out
+
+head -2 ~/gitrepos/olivia-classwork/assignments/output/08-gene-19F-coverage.out
+```
+
+
+# Intersect
+![intersect](https://gannet.fish.washington.edu/seashell/snaps/Monosnap_intersect__bedtools_2.31.0_documentation_2023-05-14_07-04-41.png)
+Lets grab a bed file of Transposable Elements and lncRNAs
+
+```{r, engine='bash', eval=FALSE}
+cd /home/olivia/gitrepos/olivia-classwork/data
+curl -O http://owl.fish.washington.edu/halfshell/genomic-databank/cgigas_uk_roslin_v1_gene.gff curl -O http://owl.fish.washington.edu/halfshell/genomic-databank/cgigas_uk_roslin_v1_rm.te.bed 
+curl -O http://owl.fish.washington.edu/halfshell/genomic-databank/cgigas_uk_roslin_v1_lncRNA.gff
+```
+
+```{r, engine='bash', eval=FALSE}
+/home/shared/bedtools2/bin/bedtools intersect \
+-a ~/gitrepos/olivia-classwork/data/cgigas_uk_roslin_v1_gene.gff \
+-b ~/gitrepos/olivia-classwork/data/cgigas_uk_roslin_v1_rm.te.bed \
+> ~/gitrepos/olivia-classwork/assignments/output/08-gene-TE-intersect.out
+
+head -2 ~/gitrepos/olivia-classwork/assignments/output/08-gene-TE-intersect.out
+```
+
+# Closest
+![closest](https://gannet.fish.washington.edu/seashell/snaps/Monosnap_closest__bedtools_2.31.0_documentation_2023-05-14_07-18-54.png)
+```{r, engine='bash', eval=FALSE}
+/home/shared/bedtools2/bin/bedtools closest \
+-a ~/gitrepos/olivia-classwork/data/cgigas_uk_roslin_v1_lncRNA.gff \
+-b ~/gitrepos/olivia-classwork/data/cgigas_uk_roslin_v1_gene.gff \
+> ~/gitrepos/olivia-classwork/assignments/output/08-lnc-gene-closet.out
+
+head -2 ~/gitrepos/olivia-classwork/assignments/output/08-lnc-gene-closet.out
+```
