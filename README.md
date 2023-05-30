@@ -1,7 +1,6 @@
 # olivia-geoduck
 repository for FISH 546 homeowork and assignments 
-see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress and https://rpubs.com/ocattau/1041088 
-
+see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress and https://rpubs.com/ocattau/1046332 
 ## Research Progress Summarized: 
 Week 1 - presented research at National Shellfish Association Meeting
 
@@ -18,11 +17,11 @@ Week 6 - finish writing introduction/discussion for geoduck paper
 
 Week 7 - address edits from Steven for CS work, run blast against other clam transcriptomes (step 8), make table for compairative clam analysis, update methods and results in geoduck paper 
 
-Week 8 - 
+Week 8 - download Dheilly 2012 data and analyze 
 
-Week 9 - 
+Week 9 - Zenodo archive, clean repos, address Steven's edits for geoduck work
 
-Week 10 - hopefully nothing, prepare for graduation!
+Week 10 - finish edits for discussion and results for geoduck chapter -- make final repo clean
 
 ## Steps:
 
@@ -54,6 +53,21 @@ Week 10 - hopefully nothing, prepare for graduation!
   - [x] S. solida
 9. Make comparative genome table for geoduck paper
   - done
+10. Comparative gonad genome w/ c. gigas
+  - [x] download gonad genes from Neilly 2012.
+  - [x] Run blast against P. generosa genome
+  - [x] filter by reproductive stage
+  - [ ] make table with go slims attached
+  - [ ] describe results
+
+
+*old Rpubs *
+
+- clean research report:
+https://rpubs.com/ocattau/1041480
+
+- annotated R script: 
+https://rpubs.com/ocattau/1041088
 
 
 
