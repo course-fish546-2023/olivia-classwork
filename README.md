@@ -1,7 +1,6 @@
 # olivia-geoduck
 repository for FISH 546 homeowork and assignments 
-see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress and https://rpubs.com/ocattau/1041088 
-
+see https://github.com/ocattau/code-for-Pgenerosa/tree/main for research progress and https://rpubs.com/ocattau/1046332 
 ## Research Progress Summarized: 
 Week 1 - presented research at National Shellfish Association Meeting
 
